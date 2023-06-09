@@ -1,0 +1,243 @@
+
+
+le callable : 
+
+
+Dans ce code, Action = Callable[[], None] est une déclaration de type qui crée un alias pour le type Callable[[], None]. Cela signifie que Action est un type qui représente une fonction callable (appelable) qui ne prend aucun argument et ne renvoie rien (None).
+
+Le type Callable est utilisé pour annoter les fonctions ou les objets qui peuvent être appelés comme des fonctions. Il prend deux arguments entre crochets : le premier argument représente les types des arguments de la fonction, et le second argument représente le type de la valeur de retour de la fonction. Dans ce cas, Callable[[], None] indique qu'une action est une fonction callable qui ne prend aucun argument ([]) et ne renvoie rien (None).
+
+Ensuite, dans la classe ActionTransition, la méthode add_transiting_action prend un argument action de type Action. Cela signifie que action doit être une fonction callable qui ne prend aucun argument et ne renvoie rien.
+
+Lorsque vous ajoutez une action à la liste __transiting_actions à l'aide de add_transiting_action, le code vérifie si l'action est callable en utilisant callable(action). Si ce n'est pas le cas, une exception est levée pour indiquer que l'objet passé en tant qu'action n'est pas une action valide.
+
+
+Pourquoi utiliser le callable : 
+Le type Callable est utilisé dans ce code pour fournir une annotation de type plus précise pour les actions de transition. En utilisant Callable[[], None] comme type d'action, on spécifie clairement que les actions doivent être des fonctions qui ne prennent aucun argument et ne renvoient rien.
+
+Voici quelques raisons pour lesquelles le type Callable est utilisé dans ce contexte :
+
+Clarifier l'interface : En utilisant le type Callable[[], None], il devient évident pour les développeurs qui utilisent cette classe qu'ils doivent fournir des fonctions qui ne prennent aucun argument et ne renvoient rien comme actions de transition. Cela améliore la lisibilité et facilite la compréhension de l'interface de la classe.
+
+Vérification statique : Les annotations de type permettent d'effectuer une vérification statique du code, ce qui peut aider à détecter les erreurs potentielles lors de la compilation ou de l'analyse statique. En utilisant Callable[[], None] comme type d'action, le compilateur ou l'outil d'analyse statique peut vérifier si les fonctions fournies en tant qu'actions respectent bien cette signature.
+
+Documentation : Les annotations de type aident à documenter le code de manière plus précise. En spécifiant le type Callable[[], None] pour les actions de transition, il devient clair pour les développeurs qui consultent le code quelles sont les attentes en termes de signatures de fonctions pour les actions.
+
+En résumé, l'utilisation du type Callable[[], None] permet de fournir une indication claire sur les attentes en termes de signatures de fonctions pour les actions de transition, tout en améliorant la lisibilité, la documentation et la vérification statique du code.
+
+
+
+
+
+Les dunder function :
+
+En Python, les "dunder functions" (également appelées "méthodes spéciales" ou "méthodes magiques") sont des méthodes prédéfinies qui commencent et se terminent par un double soulignement (underscore), par exemple __init__, __str__, __add__, etc. Elles sont utilisées pour définir le comportement spécifique des objets lorsqu'ils sont utilisés avec certaines opérations ou fonctionnalités intégrées du langage.
+
+Voici quelques exemples courants de dunder functions :
+
+__init__(self, ...): Cette méthode est appelée lors de la création d'un nouvel objet. Elle est utilisée pour initialiser les attributs de l'objet.
+
+__str__(self): Cette méthode renvoie une représentation sous forme de chaîne de caractères de l'objet. Elle est généralement utilisée pour afficher une version lisible de l'objet.
+
+__len__(self): Cette méthode renvoie la taille de l'objet. Elle est utilisée lorsque vous souhaitez obtenir la longueur d'une séquence ou d'une collection d'objets.
+
+__add__(self, other): Cette méthode définit le comportement de l'opérateur d'addition (+) pour l'objet. Elle permet d'effectuer des opérations d'addition personnalisées lorsque deux objets de votre classe sont ajoutés ensemble.
+
+__getitem__(self, key): Cette méthode permet d'accéder aux éléments d'un objet en utilisant la notation de crochets ([]). Elle est utilisée pour implémenter l'indexation et l'accès aux éléments d'une classe.
+
+__iter__(self): Cette méthode est utilisée pour rendre un objet itérable, ce qui signifie qu'il peut être utilisé dans une boucle for ou avec des fonctions telles que iter().
+
+__enter__(self) et __exit__(self, exc_type, exc_value, traceback): Ces méthodes sont utilisées pour implémenter un contexte de gestion (with) pour un objet. Elles sont souvent utilisées en conjonction avec les fichiers, les connexions réseau ou d'autres ressources qui doivent être gérées correctement et libérées après leur utilisation.
+
+Ces exemples ne représentent qu'une petite partie des dunder functions disponibles en Python. Il existe de nombreuses autres méthodes spéciales, telles que __eq__ (égalité), __lt__ (inférieur), __gt__ (supérieur), __call__ (appel d'objet comme une fonction), et bien d'autres encore.
+
+Les dunder functions permettent aux objets de se comporter de manière plus intuitive et flexible, en leur donnant la possibilité de répondre à des opérations spécifiques et de travailler de manière transparente avec les fonctionnalités intégrées du langage.
+
+
+
+
+
+Le type checking :
+
+Le type checking (vérification de type) est une technique utilisée pour valider les types des variables, des paramètres de fonction et des valeurs de retour dans un programme. Cela permet de détecter les erreurs de types dès la phase de développement, ce qui peut contribuer à rendre le code plus robuste et à réduire les bugs liés aux incompatibilités de types.
+
+En Python, le type checking peut être effectué de différentes manières :
+
+Annotations de type : Depuis Python 3.5, vous pouvez utiliser les annotations de type pour spécifier les types des variables, des paramètres et des valeurs de retour. Cependant, ces annotations ne sont que des indications et ne sont pas vérifiées automatiquement par l'interpréteur Python lui-même. Elles servent plutôt de documentation et peuvent être utilisées par des outils externes pour effectuer la vérification statique des types.
+
+Par exemple :
+
+python
+Copy code
+def add(x: int, y: int) -> int:
+    return x + y
+Outils de vérification statique des types : Il existe des outils externes tels que Mypy, Pyright, Pyre, etc., qui peuvent analyser le code Python et effectuer une vérification statique des types en se basant sur les annotations de type. Ces outils peuvent détecter les erreurs de types potentielles et fournir des avertissements lorsqu'une incompatibilité de types est détectée.
+
+Assertion de type : Vous pouvez utiliser des assertions de type pour vérifier les types à l'exécution. Cela peut être fait à l'aide de la fonction assert combinée avec la fonction isinstance() pour vérifier si une variable a le type attendu.
+
+Par exemple :
+
+python
+Copy code
+def add(x, y):
+    assert isinstance(x, int) and isinstance(y, int), "Les arguments doivent être des entiers."
+    return x + y
+Il est important de noter que la vérification de type n'est pas obligatoire en Python et le langage lui-même est dynamiquement typé, ce qui signifie que les types des variables peuvent changer à l'exécution. Cependant, l'utilisation des annotations de type et des outils de vérification statique des types peut contribuer à améliorer la qualité du code et à faciliter la maintenance à long terme.
+
+
+
+
+Le proprety :
+
+En Python, @property est un décorateur utilisé pour définir une méthode comme une propriété d'une classe. Les propriétés permettent de contrôler l'accès aux attributs d'un objet et permettent d'exécuter un code personnalisé lorsqu'un attribut est accédé, modifié ou supprimé.
+
+Voici comment utiliser @property :
+
+python
+Copy code
+class MaClasse:
+    def __init__(self):
+        self._valeur = 0
+
+    @property
+    def valeur(self):
+        return self._valeur
+
+    @valeur.setter
+    def valeur(self, nouvelle_valeur):
+        self._valeur = nouvelle_valeur
+
+    @valeur.deleter
+    def valeur(self):
+        del self._valeur
+Dans cet exemple, nous avons une classe MaClasse avec un attribut _valeur. En utilisant @property suivi d'une méthode (valeur), nous créons une propriété nommée valeur. La méthode valeur est utilisée comme un getter, qui renvoie la valeur de l'attribut _valeur.
+
+Ensuite, nous utilisons @valeur.setter pour définir une méthode valeur qui sera utilisée comme un setter. Cela nous permet de modifier la valeur de l'attribut _valeur en utilisant l'opérateur d'assignation (=).
+
+Enfin, nous utilisons @valeur.deleter pour définir une méthode valeur qui sera utilisée pour supprimer l'attribut _valeur en utilisant le mot-clé del.
+
+Maintenant, nous pouvons utiliser notre classe MaClasse :
+
+python
+Copy code
+obj = MaClasse()
+print(obj.valeur)  # Affiche: 0
+
+obj.valeur = 10
+print(obj.valeur)  # Affiche: 10
+
+del obj.valeur
+print(obj.valeur)  # Lève une exception AttributeError: 'MaClasse' object has no attribute '_valeur'
+En utilisant @property, nous pouvons accéder à l'attribut _valeur comme s'il s'agissait d'une propriété de l'objet (obj.valeur) plutôt que d'un simple attribut (obj._valeur). Cela nous permet de contrôler l'accès à l'attribut et d'exécuter du code supplémentaire, tel que la validation des valeurs assignées ou la mise à jour d'autres attributs en fonction de la valeur assignée.
+
+Les propriétés sont utiles pour créer des interfaces d'objets plus intuitives et pour encapsuler la logique d'accès aux attributs d'une classe.
+
+
+KWARGS : 
+
+En Python, kwargs est un paramètre spécial qui peut être utilisé dans la définition d'une fonction pour accepter un nombre variable d'arguments nommés. Le terme kwargs est une convention couramment utilisée, mais vous pouvez choisir un autre nom, bien que kwargs soit largement reconnu et utilisé par la communauté Python.
+
+Voici comment utiliser kwargs dans la définition d'une fonction :
+
+python
+Copy code
+def ma_fonction(**kwargs):
+    for cle, valeur in kwargs.items():
+        print(f"{cle} : {valeur}")
+Dans cet exemple, la fonction ma_fonction accepte un nombre variable d'arguments nommés. Les arguments nommés sont passés à la fonction sous la forme de paires clé-valeur, où la clé est le nom de l'argument et la valeur est sa valeur correspondante.
+
+À l'intérieur de la fonction, kwargs est traité comme un dictionnaire contenant les arguments nommés. Vous pouvez utiliser la méthode items() pour itérer sur les éléments de kwargs et accéder à la clé et à la valeur de chaque argument nommé.
+
+Voici un exemple d'utilisation de la fonction ma_fonction :
+
+python
+Copy code
+ma_fonction(nom="Alice", age=25, ville="Paris")
+La sortie de cet appel sera :
+
+yaml
+Copy code
+nom : Alice
+age : 25
+ville : Paris
+Les arguments nommés sont passés à la fonction en utilisant la syntaxe nom_argument=valeur. Dans l'exemple ci-dessus, nous passons les arguments nom, age et ville avec leurs valeurs respectives.
+
+L'utilisation de kwargs est utile lorsque vous souhaitez créer une fonction flexible qui peut accepter différents arguments nommés, sans connaître à l'avance leur nombre ou leurs noms spécifiques. Cela peut être pratique lorsque vous travaillez avec des fonctions génériques ou des bibliothèques qui doivent prendre en charge une variété de configurations d'entrée.
+
+Notez que kwargs est une convention, mais vous pouvez utiliser n'importe quel autre nom pour le paramètre. La structure ** devant le nom du paramètre est ce qui indique à Python que vous souhaitez accepter des arguments nommés sous forme de dictionnaire.
+
+
+
+Heritage et Encapsulation : 
+
+
+L'héritage et l'encapsulation sont deux concepts clés de la programmation orientée objet (POO), y compris en Python. Voici une explication de chacun de ces concepts :
+
+Héritage :
+
+L'héritage est un mécanisme qui permet à une classe (appelée classe dérivée ou sous-classe) d'hériter des attributs et des méthodes d'une autre classe (appelée classe de base ou superclasse).
+La classe dérivée peut utiliser les attributs et les méthodes de la classe de base sans les redéfinir.
+L'héritage favorise la réutilisation du code et permet de créer des relations de spécialisation entre les classes.
+En Python, l'héritage est déclaré en spécifiant la classe de base entre parenthèses lors de la définition de la classe dérivée.
+Exemple en Python :
+
+python
+Copy code
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def parler(self):
+        print("L'animal parle")
+
+class Chien(Animal):
+    def aboyer(self):
+        print("Le chien aboie")
+
+chien = Chien("Fido")
+chien.parler()  # Utilise la méthode parler de la classe Animal
+chien.aboyer()  # Utilise la méthode aboyer de la classe Chien
+Encapsulation :
+
+L'encapsulation est un principe de la POO qui consiste à regrouper les données et les méthodes associées dans une classe et à limiter l'accès direct à ces données depuis l'extérieur de la classe.
+L'encapsulation permet de cacher l'implémentation interne d'une classe et de contrôler l'accès aux données en utilisant des méthodes spécifiques (appelées méthodes d'accès ou accesseurs) pour manipuler les attributs.
+En Python, l'encapsulation est réalisée en utilisant des conventions de nommage et des décorateurs tels que @property, @getter et @setter pour définir les méthodes d'accès.
+
+UML :
+
+En UML (Unified Modeling Language), la composition, l'agrégation et l'association sont des relations qui décrivent les liens entre les classes ou les objets d'un système logiciel. Ces relations sont importantes pour modéliser les dépendances et les interactions entre les entités du système.
+
+Voici une explication de chacune de ces relations :
+
+Composition :
+
+La composition est une relation forte de tout-à-part qui implique une relation tout-partie entre deux entités.
+Dans une relation de composition, la durée de vie de l'objet tout (la classe principale) dépend des objets partie (les classes dépendantes). Si l'objet tout est détruit, les objets partie sont également détruits.
+Un objet partie ne peut appartenir qu'à un seul objet tout à la fois.
+La composition est généralement représentée par un diamant plein du côté de l'objet tout et une flèche pointant vers les objets partie.
+Agrégation :
+
+L'agrégation est une relation de tout-partie plus faible que la composition.
+Dans une relation d'agrégation, l'objet tout (la classe principale) est lié aux objets partie (les classes dépendantes), mais leur durée de vie est indépendante.
+Les objets partie peuvent exister indépendamment de l'objet tout.
+Un objet partie peut appartenir à plusieurs objets tout en même temps.
+L'agrégation est généralement représentée par un losange creux du côté de l'objet tout et une flèche pointant vers les objets partie.
+Association :
+
+L'association est une relation plus générale qui représente une relation entre deux entités, sans spécifier la nature exacte de cette relation.
+Dans une relation d'association, les objets associés peuvent exister indépendamment les uns des autres.
+Les objets associés peuvent avoir une relation de dépendance, de référence ou de communication entre eux.
+L'association est généralement représentée par une ligne solide entre les objets associés, parfois avec une flèche indiquant la direction de la relation.
+Il est important de noter que ces relations peuvent être plus complexes et peuvent inclure des multiplicités pour spécifier le nombre d'objets participant à la relation. De plus, ces relations peuvent être bidirectionnelles, unidirectionnelles ou réflexives, selon les besoins du système.
+
+En utilisant ces relations, vous pouvez modéliser les relations entre les classes ou les objets dans un diagramme de classes UML pour représenter la structure et les interactions du système logiciel de manière claire et précise.
+
+
+
+
+4 types de fonvtions : 
+- methodes
+- fonctions
+- dunder call
+- lambda
+
